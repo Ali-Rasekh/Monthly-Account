@@ -22,8 +22,10 @@ class StoreSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'Shareholder_interest_percentage' => 'required|integer|between:0,100',
-            'partners_percentage' => 'required|integer|between:0,100',
+            'Shareholder_interest_percentage' => 'required|numeric|min:0|max:100',
+            'partners_percentage' => 'required|numeric|min:0|max:100',
+            'each_partner_percent' => 'required|array',
+            'each_partner_percent.*' => 'required|numeric|min:0|max:100',
         ];
     }
 }

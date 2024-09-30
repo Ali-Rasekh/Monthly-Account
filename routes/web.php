@@ -20,4 +20,5 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 
-Route::resource('dashboard/setting', \App\Http\Controllers\SettingController::class)->except('show');
+Route::resource('dashboard/settings', \App\Http\Controllers\SettingController::class)->except('show');
+Route::resource('dashboard/persons', \App\Http\Controllers\PersonController::class)->except('show');

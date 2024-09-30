@@ -10,11 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->float('Shareholder_interest_percentage')->unsigned()->comment('درصد سهامداران');
-            $table->float('partners_percentage')->unsigned()->comment('درصد شرکا');
-            $table->timestamps();
+            $table->string('name', 100);
+            $table->unsignedInteger('wealth');
+            $table->unsignedInteger('belongings')->nullable()->comment('متعلقات');
+            $table->float('percentage_of_participation')->nullable()->comment('درصد شراکت');
         });
     }
 
@@ -23,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('people');
     }
 };
