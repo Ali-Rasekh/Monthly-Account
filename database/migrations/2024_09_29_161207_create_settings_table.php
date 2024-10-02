@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->float('Shareholder_interest_percentage')->unsigned()->comment('درصد سهامداران');
             $table->float('partners_percentage')->unsigned()->comment('درصد شرکا');
+            $table->unsignedInteger('date')->comment('jalali, should 8 digit');
             $table->timestamps();
         });
     }

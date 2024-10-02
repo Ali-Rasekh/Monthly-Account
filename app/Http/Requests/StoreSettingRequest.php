@@ -24,8 +24,8 @@ class StoreSettingRequest extends FormRequest
         return [
             'Shareholder_interest_percentage' => 'required|numeric|min:0|max:100',
             'partners_percentage' => 'required|numeric|min:0|max:100',
-            'each_partner_percent' => 'required|array',
-            'each_partner_percent.*' => 'required|numeric|min:0|max:100',
+//            'each_partner_percent' => 'required|array',
+//            'each_partner_percent.*' => 'required|numeric|min:0|max:100',
         ];
     }
 }
