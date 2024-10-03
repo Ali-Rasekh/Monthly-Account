@@ -9,7 +9,7 @@ class Setting extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'Shareholder_interest_percentage', 'partners_percentage', 'date'
+        'Shareholder_interest_percentage', 'partners_percentage', 'jdatetime'
     ];
 
 }
