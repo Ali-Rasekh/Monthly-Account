@@ -8,7 +8,7 @@
 <!-- اضافه کردن استایل‌ها -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
+<body style="direction:rtl">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{{ route('settings.index') }}">مدیریت تنظیمات</a>
     <div class="collapse navbar-collapse">

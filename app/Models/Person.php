@@ -3,13 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Person extends BaseModel
 {
     use HasFactory;
 
-    public $timestamps = false;
     protected $fillable = [
-        'name', 'wealth', 'belongings', 'percentage_of_participation'
+        'name','mobile', 'wealth', 'belongings', 'percentage_of_participation'
     ];
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

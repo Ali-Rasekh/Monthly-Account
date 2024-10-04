@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,5 +23,10 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 
-Route::resource('dashboard/settings', \App\Http\Controllers\SettingController::class)->except('show');
-Route::resource('dashboard/persons', \App\Http\Controllers\PersonController::class)->except('show');
+Route::resource('dashboard/settings', SettingController::class)->except('show');
+Route::resource('dashboard/people', PersonController::class)->except('show');
+Route::resource('dashboard/transactions', TransactionController::class)->except('show');
+
+
+Route::post('dashboard/people/set-partners-percentage', [PersonController::class, 'setPartnersPercentage'])
+    ->name('setPartnersPercentage');

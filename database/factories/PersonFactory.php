@@ -18,7 +18,7 @@ class PersonFactory extends Factory
     {
         return [
             'name' => fake()->name,
-            'wealth' => 100,
+//            'wealth' => 100,
 //            'belongings' =>,
 //            'percentage_of_participation' =>
         ];

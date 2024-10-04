@@ -16,7 +16,8 @@ class SettingController extends Controller
     {
         //    پلیس هولدر ها تو کروم
         $settings = Setting::query()->orderByDesc('id')->get();
-        return view('settings.index', compact('settings'));
+        $title = 'a';
+        return view('settings.index', compact('settings','title'));
     }
 
     public function store(StoreSettingRequest $request)

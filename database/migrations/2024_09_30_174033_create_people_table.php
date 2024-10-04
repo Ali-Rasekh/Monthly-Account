@@ -13,9 +13,12 @@ return new class extends Migration {
         Schema::create('people', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->unsignedInteger('wealth');
-            $table->unsignedInteger('belongings')->nullable()->comment('متعلقات');
-            $table->float('percentage_of_participation')->nullable()->comment('درصد شراکت');
+            $table->string('mobile', 11)->nullable();
+            $table->unsignedBigInteger('wealth')->default(0);
+            $table->unsignedBigInteger('belongings')->default(0)->comment('متعلقات');
+            $table->unsignedInteger('is_partner')->default(0);
+            $table->float('percentage_of_participation')->default(0)->comment('درصد شراکت');
+            $table->timestamps();
         });
     }
 
