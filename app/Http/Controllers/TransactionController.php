@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TransactionTypeEnum;
+use App\Http\DTOs\CreateTransactionDTO;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Models\Person;
 use App\Models\Transaction;
@@ -27,38 +28,31 @@ class TransactionController extends Controller
 
     public function getForOnePerson()
     {
-        //TODO get 1 id transactions
+        //TODO get 1 id transactions    and in person index and transaction search مشاهده تراکنش ها
     }
 
-    public function store(StoreTransactionRequest $request)
+    public function store(CreateTransactionDTO $input)
     {
-
         try {
-            $validated = $request->validated();
-            $amount = $validated['transaction_amount'];
+            $input->fillSystematicFields();
+            $personId = $input->person_id;
+            Transaction::create($input->toArray());
 
-            if ($validated['operation'] == '-') $validated['transaction_amount'] = -$amount;
-            unset($validated['operation']);
-            $validated['jdatetime'] = $this->getNowByDateTimeString();
-            $personId = $validated['person_id'];
-            Transaction::create($validated);
-
-            if ($validated['transaction_type'] == 1) {
+            if ($input->transaction_type == TransactionTypeEnum::wealth) {
                 $wealth = Person::query()->find($personId, 'wealth')->wealth;
-                $wealth += $amount;
+                $wealth += $input->transaction_amount;
                 if ($wealth < 0) throw new \Exception('wealth lower than 0');
                 Person::query()->where('id', $personId)->update(['wealth' => $wealth]);
-            } elseif ($validated['transaction_type'] == 2) {
+            } elseif ($input->transaction_type == TransactionTypeEnum::belongings) {
                 $belongings = Person::query()->find($personId, 'belongings')->belongings;
-                $belongings += $amount;
+                $belongings += $input->transaction_amount;
                 if ($belongings < 0) throw new \Exception('belongings lower than 0');
                 Person::query()->where('id', $personId)->update(['belongings' => $belongings]);
             } else throw new Exception('type is 1 , 2');
         } catch (\Throwable $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $e->getMessage(), 400]);
         }
         return redirect()->route('people.index')
             ->with('success', 'تراکنش با موفقیت ثبت شد');
-
     }
 }

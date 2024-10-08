@@ -10,7 +10,7 @@ class Person extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'name','mobile', 'wealth', 'belongings', 'percentage_of_participation'
+        'name', 'mobile', 'wealth', 'is_partner', 'belongings', 'percentage_of_participation'
     ];
 
     public function transactions(): HasMany

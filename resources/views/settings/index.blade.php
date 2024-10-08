@@ -15,6 +15,16 @@
         </div>
     @endif
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <table class="table table-sm table-bordered mt-3" style="width: 50%; margin: auto; background-color: #f7f7f7; direction: rtl;">
         <thead style="background-color: #007bff; color: white;">
         <tr>

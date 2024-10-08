@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -23,10 +23,12 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 
-Route::resource('dashboard/settings', SettingController::class)->except('show');
-Route::resource('dashboard/people', PersonController::class)->except('show');
-Route::resource('dashboard/transactions', TransactionController::class)->except('show');
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::resource('settings', SettingController::class)->only(['index', 'store']);
+    Route::resource('people', PersonController::class)->only(['index', 'store', 'update']);
+    Route::resource('transactions', TransactionController::class)->only(['index', 'store']);
 
+    Route::post('people/set-partners-percentage', [PersonController::class, 'setPartnersPercentage'])
+        ->name('setPartnersPercentage');
+});
 
-Route::post('dashboard/people/set-partners-percentage', [PersonController::class, 'setPartnersPercentage'])
-    ->name('setPartnersPercentage');

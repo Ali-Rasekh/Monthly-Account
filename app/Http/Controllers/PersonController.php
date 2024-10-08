@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\DTOs\UpsertPersonDTO;
 use App\Http\Requests\SetPartnersPercentageRequest;
 use App\Http\Requests\UpsertPersonRequest;
 use App\Models\Person;
@@ -13,19 +14,16 @@ class PersonController extends Controller
 
     public function index()
     {
-        $people = Person::all();
+        $people = Person::query()->orderByDesc('id')->get();
         $partners = Person::query()->where('is_partner', 1)->get(['id', 'name']);
         return view('people.index', compact('people', 'partners'));
     }
 
-    public function store(UpsertPersonRequest $request)
+    public function store(UpsertPersonDTO $inputDTO)
     {
         try {
-            $validated = $request->validated();
-            if (empty($validated['is_partner'])) $validated['is_partner'] = 0;
-            if ($validated['is_partner'] == 'on') $validated['is_partner'] = 1;
-            if (isset($validated['mobile']) && strlen((int)$validated['mobile']) != 11) throw new Exception('mobile number should 11 numbers');
-            Person::create($validated);
+            $inputDTO->fillSystematicFields();
+            Person::create($inputDTO->toArray());
         } catch (\Throwable $e) {
             return response()->json(['message' => $e->getMessage()]);
         }
@@ -33,16 +31,13 @@ class PersonController extends Controller
             ->with('success', 'مشخصات فرد جدید با موفقیت ذخیره شد');
     }
 
-    public function update(Person $person, UpsertPersonRequest $request)
+    public function update(Person $person, UpsertPersonDTO $inputDTO)
     {
         try {
-            $validated = $request->validated();
-            if (empty($validated['is_partner'])) $validated['is_partner'] = 0;
-            if ($validated['is_partner'] == 'on') $validated['is_partner'] = 1;
-            if (isset($validated['mobile']) && strlen((int)$validated['mobile']) != 11) throw new Exception('mobile number should 11 numbers');
-            $person->update($validated);
+            $inputDTO->fillSystematicFields();
+            $person->update($inputDTO->toArray());
         } catch (\Throwable $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $e->getMessage()], 400);
         }
         return redirect()->route('people.index')
             ->with('success', 'مشخصات فرد با موفقیت به روز رسانی شد');

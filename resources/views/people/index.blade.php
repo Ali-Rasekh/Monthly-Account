@@ -21,11 +21,21 @@
         </div>
     @endif
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <table class="table table-sm table-bordered mt-3"
            style="width: 80%; margin: auto; background-color: #f7f7f7; direction: rtl;">
         <thead style="background-color: #007bff; color: white;">
         <tr style="text-align:center">
-            <th>آیدی</th>
+            <th>ردیف</th>
             <th>نام</th>
             <th>موبایل</th>
             <th style="width: 20%;">سرمایه</th>
@@ -201,19 +211,6 @@
     </div>
 
     <style>
-
-        /* تغییر موقعیت نماد منفی */
-        .input-prefix::before {
-            content: '-'; /* محتوا */
-            font-size: 24px; /* اندازه بزرگتر */
-            color: red; /* رنگ */
-            position: absolute;
-            right: 10px; /* فاصله از سمت راست */
-            top: 30%; /* موقعیت پایین‌تر */
-            transform: translateY(-50%); /* مرکز کردن عمودی */
-            pointer-events: none; /* جلوگیری از کلیک بر روی نماد */
-        }
-
 
         /* استایل برای مدال کشویی */
         .side-modal {

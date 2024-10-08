@@ -24,7 +24,7 @@ class UpsertPersonRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:' . LengthEnum::Mid,
-            'mobile' => 'nullable|string|max:11',
+            'mobile' => 'nullable|numeric|digits:11',
             'is_partner' => 'nullable',
         ];
     }
