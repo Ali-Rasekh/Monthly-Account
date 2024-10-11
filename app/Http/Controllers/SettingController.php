@@ -14,10 +14,8 @@ class SettingController extends Controller
 
     public function index()
     {
-        //    پلیس هولدر ها تو کروم
         $settings = Setting::query()->orderByDesc('id')->get();
-        $title = 'a';
-        return view('settings.index', compact('settings','title'));
+        return view('settings.index', compact('settings'));
     }
 
     public function store(StoreSettingRequest $request)

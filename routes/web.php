@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
@@ -27,6 +28,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::resource('settings', SettingController::class)->only(['index', 'store']);
     Route::resource('people', PersonController::class)->only(['index', 'store', 'update']);
     Route::resource('transactions', TransactionController::class)->only(['index', 'store']);
+    Route::resource('accounts', AccountController::class)->except(['create', 'show']);
 
     Route::post('people/set-partners-percentage', [PersonController::class, 'setPartnersPercentage'])
         ->name('setPartnersPercentage');

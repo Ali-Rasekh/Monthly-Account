@@ -17,4 +17,9 @@ class Person extends BaseModel
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function monthlyProfits(): HasMany
+    {
+        return $this->hasMany(MonthlyProfit::class);
+    }
 }
