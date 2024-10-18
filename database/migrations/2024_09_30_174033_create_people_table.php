@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 100);
             $table->string('mobile', 11)->nullable();
-            $table->unsignedBigInteger('wealth')->default(0);
-            $table->unsignedBigInteger('belongings')->default(0)->comment('متعلقات');
+            $table->float('wealth')->default(0);
+            $table->float('belongings')->default(0)->comment('متعلقات');
             $table->unsignedTinyInteger('is_partner');
             $table->float('percentage_of_participation')->default(0)->comment('درصد شراکت');
             $table->timestamps();

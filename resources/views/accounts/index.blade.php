@@ -1,17 +1,20 @@
 <html lang="fa">
 
 <head>
+    <title>حساب ها</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نمودار درختی</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.fontcdn.ir/Font/Vazir/vazir.css" rel="stylesheet">
     <style>
 
         body {
+            background: linear-gradient(135deg, #6e7dff, #b03c9a);
+            font-family: 'Vazir', sans-serif;
             direction: rtl;
-            font-family: Arial, sans-serif;
+            /*font-family: Arial, sans-serif;*/
             margin: 20px;
-            background-color: #f8f9fa;
+            /*background-color: #f8f9fa;*/
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -88,30 +91,6 @@
             background-color: #1976d2; /* رنگ تیره‌تر در هاور */
         }
 
-        .edit-button {
-            background-color: #ff9800; /* نارنجی برای دکمه ویرایش */
-        }
-
-        .edit-button:hover {
-            background-color: #f57c00; /* رنگ تیره‌تر در هاور */
-        }
-
-        .delete-button {
-            background-color: #f44336;
-        }
-
-        .delete-button:hover {
-            background-color: #c62828;
-        }
-
-        .detail-button {
-            background-color: #2196f3;
-        }
-
-        .detail-button:hover {
-            background-color: #1976d2;
-        }
-
         button {
             background-color: #007bff; /* رنگ آبی */
             color: white; /* رنگ متن سفید */
@@ -126,22 +105,6 @@
         button:hover {
             background-color: #0056b3; /* رنگ تیره‌تر در هاور */
             transform: scale(1.05); /* بزرگ‌تر شدن در هاور */
-        }
-
-        .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            transition: color 0.3s;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black; /* تغییر رنگ در هاور */
         }
 
         h2 {
@@ -164,48 +127,12 @@
             box-shadow: 0 0 5px rgba(0, 91, 255, 0.5); /* سایه در فوکوس */
         }
 
-        /* modal */
-        .side-modal {
-            transition: all 0.4s ease-out;
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 0;
-            height: 100%;
-            background-color: white;
-            overflow-x: hidden;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-
-        .side-modal-content {
-            padding: 20px;
-            width: 300px;
-        }
-
-        .close {
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-        }
 
         .side-modal input {
             margin-bottom: 15px;
         }
-
-        .form-group {
-            text-align: right;
-        }
-
         label {
             float: right;
-        }
-
-        .btn {
-            width: 100%;
         }
 
         .alert {
@@ -230,7 +157,6 @@
     @stack('styles')
 </head>
 <body>
-<h1>نمودار درختی حساب‌ها</h1>
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -286,7 +212,7 @@
 
     function closeAllModals() {
         let openModals = document.querySelectorAll('.side-modal'); // پیدا کردن همه مدال‌ها
-        openModals.forEach(function(modal) {
+        openModals.forEach(function (modal) {
             modal.style.width = '0'; // بستن هر مدال
         });
     }

@@ -3,6 +3,12 @@
 @section('title', 'لیست تراکنش‌ها')
 
 @section('content')
+    <style>
+        body {
+            background: linear-gradient(135deg, #6e7dff, #b03c9a);
+            font-family: 'Vazir', sans-serif;
+        }
+    </style>
     <h2 class="text-center">لیست تراکنش‌ها</h2>
 
     @if ($errors->any())

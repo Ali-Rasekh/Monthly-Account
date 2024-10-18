@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- اضافه کردن استایل‌ها -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.fontcdn.ir/Font/Vazir/vazir.css" rel="stylesheet">
+
     <title>@yield('title')</title>
     @stack('styles')
 </head>
@@ -25,5 +27,11 @@
 <!-- فایل JavaScript خودتان -->
 <script src="{{ asset('js/accounts.js') }}"></script>
 @stack('scripts')
+<style>
+    body {
+        background: linear-gradient(135deg, #6e7dff, #b03c9a);
+        font-family: 'Vazir', sans-serif;
+    }
+</style>
 </body>
 </html>

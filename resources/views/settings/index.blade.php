@@ -1,9 +1,9 @@
 @extends('layout')
 
-@section('title', 'لیست تنظیمات')
+@section('title', ' تنظیمات')
 
 @section('content')
-    <h2 class="text-center">لیست تنظیمات</h2>
+    <h2 class="text-center"> تنظیمات</h2>
 
     <div class="text-center mb-3">
         <button type="button" class="btn btn-primary" onclick="openSideModal()">تغییر درصد سود بین شرکا و سهامداران</button>
@@ -74,6 +74,12 @@
     </div>
 
     <style>
+
+        body {
+            background: linear-gradient(135deg, #6e7dff, #b03c9a);
+            font-family: 'Vazir', sans-serif;
+        }
+
         /* استایل برای مدال کشویی */
         .side-modal {
             position: fixed;

@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('account_values', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('account_id');
+            $table->unsignedBigInteger('account_id');
             $table->float('value')->unsigned();
             $table->unsignedBigInteger('jdatetime')->comment('jalali');
             $table->timestamps();

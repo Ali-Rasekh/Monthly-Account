@@ -1,9 +1,9 @@
 @extends('layout')
 
-@section('title', 'لیست افراد')
+@section('title', 'لیست سرمایه داران')
 
 @section('content')
-    <h2 class="text-center">لیست افراد</h2>
+    <h2 class="text-center">لیست سرمایه داران</h2>
 
     <div class="text-center mb-3">
         <button type="button" class="btn btn-primary" onclick="openSideModal()">افزودن فرد جدید</button>
@@ -211,7 +211,10 @@
     </div>
 
     <style>
-
+        body {
+            background: linear-gradient(135deg, #6e7dff, #b03c9a);
+            font-family: 'Vazir', sans-serif;
+        }
         /* استایل برای مدال کشویی */
         .side-modal {
             position: fixed;

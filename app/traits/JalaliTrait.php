@@ -42,4 +42,9 @@ trait JalaliTrait
     {
         return Jalalian::now()->toDateTimeString();
     }
+
+    public function getNowByDateString(): string
+    {
+        return Jalalian::now()->toDateString();
+    }
 }
