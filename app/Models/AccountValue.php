@@ -19,4 +19,11 @@ class AccountValue extends BaseModel
     {
         return $this->belongsTo(Account::class);
     }
+
+    protected $appends = ['account_name'];
+
+    public function getAccountNameAttribute()
+    {
+        return  $this->account->name ?? 'Unknown Account';
+    }
 }

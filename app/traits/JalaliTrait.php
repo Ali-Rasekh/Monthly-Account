@@ -17,7 +17,6 @@ trait JalaliTrait
         $date = Str::remove('/', $date);
         $time = substr($dateTime, 11);
         $time = Str::remove(':', $time);
-
         return $date . $time;
     }
 

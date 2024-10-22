@@ -17,10 +17,9 @@ class UserSeeder extends Seeder
     {
         User::factory()->create();
         Setting::factory()->create();
-        //TODO remove moosa
-        Person::factory(2)->sequence([
-            'name' => 'iman', 'wealth' => 50, 'belongings' => 30, 'is_partner' => 1, 'percentage_of_participation' => 99],
-            ['name' => 'moosa', 'wealth' => 50, 'belongings' => 30, 'is_partner' => 1, 'percentage_of_participation' => 1]
+        Person::factory(1)->sequence([
+            'name' => 'ایمان', 'wealth' => 50, 'belongings' => 30, 'is_partner' => 1, 'percentage_of_participation' => 100],
+//            ['name' => 'moosa', 'wealth' => 50, 'belongings' => 30, 'is_partner' => 1, 'percentage_of_participation' => 1]
         )->create();
     }
 }

@@ -27,4 +27,11 @@ class MonthlyProfit extends BaseModel
     {
         return $this->belongsTo(Person::class);
     }
+
+    protected $appends = ['person_name'];
+
+    public function getPersonNameAttribute()
+    {
+        return $this->person->name ?? 'Unknown Account';
+    }
 }

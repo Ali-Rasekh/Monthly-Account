@@ -22,11 +22,11 @@
             padding: 0;
             display: flex;
             justify-content: space-around;
-            color: white;
+            color: #f0f0f0
         }
 
         nav a {
-            color: white;
+            color: #f0f0f0;
             text-decoration: none;
         }
 
@@ -55,7 +55,7 @@
         }
 
         h5 {
-            color: #e0e0e0; /* رنگ عنوان‌ها */
+            color: #0056b3; /* رنگ عنوان‌ها */
         }
 
         .btn-primary {
@@ -71,26 +71,10 @@
         .table th, .table td {
             vertical-align: middle; /* تنظیم عمودی متن داخل سلول‌ها */
         }
-
-        /* استایل دراپ‌داون در گوشه سمت راست */
-        .dropdown-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 20px;
-        }
-
-        .dropdown-select {
-            background-color: #fff;
-            color: #333;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
     </style>
 
 </head>
 <body>
-
 <nav>
     <ul>
         <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
@@ -118,18 +102,6 @@
 @endif
 
 <div class="content">
-
-    <!-- اضافه کردن دراپ‌داون برای انتخاب تاریخ‌ها -->
-    <div class="dropdown-container">
-        <form action="{{ route('profits.index') }}" method="GET">
-            <select name="date" class="dropdown-select" onchange="this.form.submit()">
-                @foreach($allDateTimes as $key => $date)
-                    <option value="{{ $key }}" {{ request('date') == $key ? 'selected' : '' }}>{{ $date }}</option>
-                @endforeach
-            </select>
-        </form>
-    </div>
-
     <!-- جدول سود ماهیانه -->
     <h5>جدول سود ماهیانه</h5>
     <table class="table table-bordered table-striped table-hover">
@@ -148,10 +120,10 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($monthlyProfits as $profit)
+        @foreach($monthlyProfitsShow as $profit)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $profit['person_name'] }}</td>
+                <td>{{ $profit['name'] }}</td>
                 <td>{{ $profit['current_wealth'] }}</td>
                 <td>{{ $profit['current_belongings'] }}</td>
                 <td>{{ $profit['current_participation_percentage'] }}</td>
@@ -177,7 +149,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($accountValues as $account)
+        @foreach($accountValuesShow as $account)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $account['account_name'] }}</td>
@@ -188,7 +160,19 @@
         </tbody>
     </table>
 
+    <div class="d-flex justify-content-center">
+        <!-- فرم برای ارسال داده‌ها -->
+        <form method="POST" action="{{ route('dashboard.store') }}">
+            @csrf
+            <input type="hidden" name="accountValuesTable" value="{{ json_encode($accountValuesTable) }}">
+            <input type="hidden" name="monthlyProfitsTable" value="{{ json_encode($monthlyProfitsTable) }}">
+            <button type="submit" class="btn btn-primary me-2">ذخیره</button>
+            <button type="button" class="btn btn-secondary" onclick="history.back()">بازگشت</button>
+        </form>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

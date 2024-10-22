@@ -13,13 +13,13 @@ return new class extends Migration {
         Schema::create('monthly_profits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('person_id'); // شناسه شخص
-            $table->float('current_wealth')->unsigned(); // دارایی شخص در آن لحظه
-            $table->float('current_belongings')->unsigned(); // متعلقات شخص در آن لحظه
-            $table->float('current_participation_percentage')->unsigned(); // درصد شراکت شخص در آن لحظه
-            $table->float('wealth_profit'); // سود حاصل از دارایی
-            $table->float('belongings_profit'); // سود حاصل از متعلقات
-            $table->float('participation_profit'); // سود حاصل از شراکت
-            $table->float('total_profit'); // کل سود شخص در آن لحظه
+            $table->float('current_wealth')->unsigned()->default(0); // دارایی شخص در آن لحظه
+            $table->float('current_belongings')->unsigned()->default(0); // متعلقات شخص در آن لحظه
+            $table->float('current_participation_percentage')->unsigned()->default(0); // درصد شراکت شخص در آن لحظه
+            $table->float('wealth_profit')->default(0); // سود حاصل از دارایی
+            $table->float('belongings_profit')->default(0); // سود حاصل از متعلقات
+            $table->float('participation_profit')->default(0); // سود حاصل از شراکت
+            $table->float('total_profit')->default(0); // کل سود شخص در آن لحظه
             $table->unsignedBigInteger('jdatetime')->comment('jalali');
             $table->timestamps();
         });

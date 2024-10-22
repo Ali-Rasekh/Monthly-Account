@@ -19,8 +19,9 @@ Route::post('check', [DashboardController::class, 'check'])->name('check-it');
 Route::prefix('dashboard')->middleware(checkAdmin::class)->group(function () {
     Route::get('', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('calculate', [DashboardController::class, 'calculate'])->name('calculate');
-    Route::get('logout', [DashboardController::class, 'logout'])->name('logout');
     Route::post('', [DashboardController::class, 'store'])->name('dashboard.store');
+    Route::get('logout', [DashboardController::class, 'logout'])->name('logout');
+
     Route::resource('settings', SettingController::class)->only(['index', 'store']);
     Route::resource('people', PersonController::class)->only(['index', 'store', 'update']);
     Route::resource('transactions', TransactionController::class)->only(['index', 'store']);

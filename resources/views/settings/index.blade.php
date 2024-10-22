@@ -3,10 +3,27 @@
 @section('title', ' تنظیمات')
 
 @section('content')
+
+    <nav>
+        <ul>
+            <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
+            <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
+            <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
+            <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
+            <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
+            <li><a href="{{ route('logout') }}">خروج</a></li>
+            <li>
+                <a href="{{ route('dashboard') }}">
+                    <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+                </a>
+            </li>
+        </ul>
+    </nav>
+
     <h2 class="text-center"> تنظیمات</h2>
 
     <div class="text-center mb-3">
-        <button type="button" class="btn btn-primary" onclick="openSideModal()">تغییر درصد سود بین شرکا و سهامداران</button>
+        <button type="button" class="btn btn-primary" style="color: #f0f0f0" onclick="openSideModal()">تغییر درصد سود بین شرکا و سهامداران</button>
     </div>
 
     @if ($message = Session::get('success'))
@@ -26,7 +43,7 @@
     @endif
 
     <table class="table table-sm table-bordered mt-3" style="width: 50%; margin: auto; background-color: #f7f7f7; direction: rtl;">
-        <thead style="background-color: #007bff; color: white;">
+        <thead style="background-color: #007bff; color: #f0f0f0;">
         <tr>
             <th style="width: 33%;">درصد شرکا</th>
             <th style="width: 33%;">درصد سهامداران</th>
@@ -45,10 +62,10 @@
     </table>
 
     <!-- مدال کشویی برای افزودن تنظیم جدید -->
-    <div id="sideModal" class="side-modal">
+    <div id="sideModal" class="side-modal" style="background-color:#2c2c2c ">
         <div class="side-modal-content">
             <span class="close" onclick="closeSideModal()">&times;</span>
-            <h3>ایجاد تنظیم جدید</h3>
+            <h3 style="color: #f0f0f0">ایجاد تنظیم جدید</h3>
             <form id="createSettingForm" action="{{ route('settings.store') }}" method="POST" onsubmit="return validateCreateForm();">
                 @csrf
                 <div class="form-group text-right">
@@ -68,16 +85,44 @@
 
                 <p id="modal-error-message" class="error-message" style="display:none;">جمع درصدها باید دقیقا 100 باشد!</p>
 
-                <button type="submit" class="btn btn-success">ذخیره</button>
+                <button type="submit" class="btn btn-primary" style="position: relative;left: 80px;width: 100px">ذخیره</button>
             </form>
         </div>
     </div>
 
     <style>
 
+        nav {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+            padding: 5px; /* کاهش ارتفاع نوار */
+            border-radius: 5px;
+            /*margin-bottom: 20px;*/
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            color: #f0f0f0;
+        }
+
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #f0f0f0; /* سفید کم‌رنگ */
+            color: #2c2c2c;
+            /*text-decoration: underline; !* زیر خط لینک‌ها هنگام هاور *!*/
+        }
+
         body {
-            background: linear-gradient(135deg, #6e7dff, #b03c9a);
+            background-color: #2c2c2c; /* یک رنگ خاکستری تیره */
             font-family: 'Vazir', sans-serif;
+            color: #f0f0f0; /* برای خوانایی متن روی پس‌زمینه تیره */
         }
 
         /* استایل برای مدال کشویی */
@@ -173,5 +218,11 @@
             document.getElementById('modal-error-message').style.display = 'none';
             return true;
         }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeSideModal();
+            }
+        });
     </script>
 @endsection

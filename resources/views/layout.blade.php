@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="http://127.0.0.1:8000/aida.ico" type="image/ico">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- اضافه کردن استایل‌ها -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -28,10 +30,9 @@
 <script src="{{ asset('js/accounts.js') }}"></script>
 @stack('scripts')
 <style>
-    body {
-        background: linear-gradient(135deg, #6e7dff, #b03c9a);
-        font-family: 'Vazir', sans-serif;
-    }
+
+
 </style>
+
 </body>
 </html>

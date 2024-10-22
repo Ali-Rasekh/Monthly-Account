@@ -10,14 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('account_values', function (Blueprint $table) {
+        Schema::create('fixed_profits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('account_id');
-            $table->float('value');
+            $table->float('profit');
             $table->unsignedBigInteger('jdatetime')->comment('jalali');
             $table->timestamps();
-
-            $table->foreign('account_id')->references('id')->on('accounts')->restrictOnDelete();
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('account_values');
+        Schema::dropIfExists('fixed_profits');
     }
 };

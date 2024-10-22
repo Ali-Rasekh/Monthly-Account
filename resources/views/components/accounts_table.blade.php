@@ -9,7 +9,7 @@
     <style>
         body {
             direction: rtl;
-            font-family: Arial, sans-serif;
+            font-family: Vazir, sans-serif;
             margin: 20px;
             background-color: #f8f9fa;
             display: flex;
@@ -130,7 +130,8 @@
         nav {
             position: relative;
             top: -30px;
-            background-color: #4caf50; /* رنگ جدید نوار ناوبری */
+            background-color: #3a3a3a;
+            color: #e0e0e0;
             padding: 5px; /* کاهش ارتفاع نوار */
             border-radius: 5px;
             /*margin-bottom: 20px;*/
@@ -141,17 +142,17 @@
             padding: 0;
             display: flex;
             justify-content: space-around;
-            color: white;
+            color: #f0f0f0;
         }
 
         nav a {
-            color: white;
+            color: #f0f0f0;
             text-decoration: none;
         }
 
         nav a:hover {
-            color: #ffeb3b; /* تغییر رنگ لینک‌ها هنگام هاور */
-            text-decoration: underline; /* زیر خط لینک‌ها هنگام هاور */
+            background-color: #f0f0f0; /* سفید کم‌رنگ */
+            color: #2c2c2c;
         }
 
     </style>
@@ -167,6 +168,11 @@
         <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
         <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
         <li><a href="{{ route('logout') }}">خروج</a></li>
+        <li>
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+            </a>
+        </li>
     </ul>
 </nav>
 
@@ -210,8 +216,8 @@
 
 <form id="calculateForm" action="{{ route('calculate') }}" method="POST">
     @csrf
-    <label for="dateInput" style="width:50px;margin-right: 800px;position: relative;top: -110px ">تاریخ:</label>
-    <input type="text" id="dateInput" name="date" value="{{ $today }}" required {{--style="margin-right: 800px;"--}} >
+    <label for="dateInput" style="width:50px;margin-right: 800px;position: relative;top: -110px;left: -33px ">تاریخ:</label>
+    <input type="text" id="dateInput" name="date" value="{{ $today }} " required style="position: relative;left: -33px" >
     <input type="hidden" name="shareholder_interest_percentage" value="{{ $info['Shareholder_interest_percentage'] }}">
     <input type="hidden" name="partners_percentage" value="{{ $info['partners_percentage'] }}">
     <input type="hidden" name="total_wealth" value="{{ $info['total_wealth'] }}">
@@ -225,7 +231,7 @@
 <p id="error-message" style="color:red; display:none;">فرمت تاریخ باید به شکل YYYY/MM/DD باشد.</p>
 
 <div class="button-container" style="margin-right: 800px;margin-top: -105px">
-    <button type="button" onclick="submitForm()">محاسبه</button>
+    <button type="button" onclick="submitForm()"  style="position: relative;left: -33px">محاسبه</button>
 </div>
 
 <script>

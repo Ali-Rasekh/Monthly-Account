@@ -31,6 +31,8 @@ class CalculateInputDTO extends Data
 
     public function fillSystematicFields(): void
     {
-
+        foreach ($this->accounts as $key => &$account) {
+            if ($key == 10 || $key == 11) $account = -abs($account);
+        }
     }
 }

@@ -3,6 +3,7 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="http://127.0.0.1:8000/aida.ico" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>داشبورد</title>
@@ -56,12 +57,13 @@
         }
 
         body {
-            background: linear-gradient(135deg, #6e7dff, #b03c9a);
-            font-family: 'Poppins', sans-serif;
+            background-color: #2c2c2c; /* یک رنگ خاکستری تیره */
+            font-family: 'Vazir', sans-serif;
+            color: #f0f0f0; /* برای خوانایی متن روی پس‌زمینه تیره */
         }
 
         .percentages {
-            margin-top: -170px; /* فاصله کمتر از جدول */
+            margin-top: -125px; /* فاصله کمتر از جدول */
             padding: 5px 10px; /* پدینگ کمتر از بالا و پایین، و کمی بیشتر از چپ و راست */
             background-color: #007bff; /* پس‌زمینه سفید */
             border: 1px solid #ddd; /* حاشیه خاکستری */

@@ -3,10 +3,27 @@
 @section('title', 'لیست سرمایه داران')
 
 @section('content')
-    <h2 class="text-center">لیست سرمایه داران</h2>
+
+    <nav>
+        <ul>
+            <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
+            <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
+            <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
+            <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
+            <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
+            <li><a href="{{ route('logout') }}">خروج</a></li>
+            <li>
+                <a href="{{ route('dashboard') }}">
+                    <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <h2 class="text-center" style="color: #f0f0f0">لیست سرمایه داران</h2>
 
     <div class="text-center mb-3">
-        <button type="button" class="btn btn-primary" onclick="openSideModal()">افزودن فرد جدید</button>
+        <button type="button" class="btn btn-primary " style="color: #f0f0f0" onclick="openSideModal()">افزودن فرد جدید</button>
     </div>
 
     <div class="text-end mb-3" style="margin-left: 840px;">
@@ -34,7 +51,7 @@
     <table class="table table-sm table-bordered mt-3"
            style="width: 80%; margin: auto; background-color: #f7f7f7; direction: rtl;">
         <thead style="background-color: #007bff; color: white;">
-        <tr style="text-align:center">
+        <tr style="text-align:center;color: #f0f0f0" >
             <th>ردیف</th>
             <th>نام</th>
             <th>موبایل</th>
@@ -112,7 +129,7 @@
                     <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-success">ذخیره</button>
+                <button type="submit" class="btn btn-primary">ذخیره</button>
             </form>
         </div>
     </div>
@@ -143,7 +160,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-success">ذخیره</button>
+                <button type="submit" class="btn btn-primary">ذخیره</button>
             </form>
         </div>
     </div>
@@ -177,7 +194,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-success">ذخیره</button>
+                <button type="submit" class="btn btn-primary">ذخیره</button>
             </form>
         </div>
     </div>
@@ -187,7 +204,7 @@
     <div id="partnersModal" class="side-modal">
         <div class="side-modal-content">
             <span class="close" onclick="closePartnersModal()">&times;</span>
-            <h3>تخصیص درصد شرکا</h3>
+            <h3 style="color: #f0f0f0">تخصیص درصد شرکا</h3>
             <form id="partnersForm" action="{{ route('setPartnersPercentage') }}" method="POST"
                   onsubmit="return handlePartnersSubmit(event)">
                 @csrf
@@ -205,15 +222,43 @@
                     <input type="number" class="form-control" id="total" name="total" readonly>
                 </div>
 
-                <button type="submit" class="btn btn-success">ذخیره</button>
+                <button type="submit" class="btn btn-primary">ذخیره</button>
             </form>
         </div>
     </div>
 
     <style>
+        nav {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+            padding: 5px; /* کاهش ارتفاع نوار */
+            border-radius: 5px;
+            /*margin-bottom: 20px;*/
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            color: #f0f0f0;
+        }
+
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #f0f0f0; /* سفید کم‌رنگ */
+            color: #2c2c2c;
+            /*text-decoration: underline; !* زیر خط لینک‌ها هنگام هاور *!*/
+        }
+
         body {
-            background: linear-gradient(135deg, #6e7dff, #b03c9a);
+            background-color: #2c2c2c; /* یک رنگ خاکستری تیره */
             font-family: 'Vazir', sans-serif;
+            color: #f0f0f0; /* برای خوانایی متن روی پس‌زمینه تیره */
         }
         /* استایل برای مدال کشویی */
         .side-modal {
@@ -222,7 +267,7 @@
             top: 0;
             width: 0;
             height: 100%;
-            background-color: white;
+            background-color: #3a3a3a;
             overflow-x: hidden;
             transition: 0.5s;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
@@ -272,10 +317,60 @@
         label {
             float: right;
         }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+        }
+
+        /* مخفی کردن چک‌باکس */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* طراحی اسلایدر */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 2.5px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        /* وقتی چک‌باکس فعال باشد */
+        input:checked + .slider {
+            background-color: #2c2c2c;
+        }
+
+        /* تغییر مکان دایره هنگام فعال شدن */
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
     </style>
 
     <script>
         function openPartnersModal() {
+            closeEditModal()
             closeSideModal();
             closeSideModalAction();
             document.getElementById('partnersModal').style.width = '300px';
@@ -375,6 +470,7 @@
         function openEditModal(personId, name, mobile, isPartner) {
             closeSideModal()
             closeSideModalAction()
+            closePartnersModal()
             document.getElementById('editModal').style.width = '300px';
             document.getElementById('editPersonId').value = personId;
             document.getElementById('editName').value = name;

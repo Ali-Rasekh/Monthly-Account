@@ -8,8 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #6e7dff, #b03c9a);
-            font-family: 'Poppins', sans-serif;
+            background-color: #2c2c2c; /* یک رنگ خاکستری تیره */
+            font-family: 'Vazir', sans-serif;
+            color: #f0f0f0;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -33,16 +34,16 @@
         }
 
         .btn-primary {
-            background-color: #ff416c;
-            border-color: #ff416c;
+            /*background-color: #ff416c;*/
+            /*border-color: #ff416c;*/
             border-radius: 50px;
             padding: 10px 0;
             transition: background-color 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #ff4b2b;
-            border-color: #ff4b2b;
+            /*background-color: #ff4b2b;*/
+            /*border-color: #ff4b2b;*/
         }
 
         .form-control {
@@ -56,7 +57,7 @@
 
         .form-control:focus {
             background-color: #e0e0e0;
-            border-color: #ff416c;
+            /*border-color: #ff416c;*/
             box-shadow: none;
         }
 
@@ -109,14 +110,14 @@
     <form method="POST" action="{{ route('check-it') }}">
         @csrf
         <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
+            <label for="email" class="form-label" style="color: #3a3a3a">Email:</label>
             <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
             @error('email')
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
+            <label for="password" class="form-label" style="color: #3a3a3a">Password:</label>
             <input type="password" name="password" id="password" class="form-control" required>
             @error('password')
             <div class="text-danger">{{ $message }}</div>
