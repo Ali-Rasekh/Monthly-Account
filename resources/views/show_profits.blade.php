@@ -10,11 +10,11 @@
 
     <style>
         nav {
+            width: 100%;
             background-color: #3a3a3a;
             color: #e0e0e0;
-            padding: 5px; /* کاهش ارتفاع نوار */
+            padding: 5px;
             border-radius: 5px;
-            /*margin-bottom: 20px;*/
         }
 
         nav ul {
@@ -22,7 +22,7 @@
             padding: 0;
             display: flex;
             justify-content: space-around;
-            color: #f0f0f0
+            color: #f0f0f0;
         }
 
         nav a {
@@ -31,31 +31,30 @@
         }
 
         nav a:hover {
-            background-color: #f0f0f0; /* سفید کم‌رنگ */
+            background-color: #f0f0f0;
             color: #2c2c2c;
-            /*text-decoration: underline; !* زیر خط لینک‌ها هنگام هاور *!*/
         }
 
         body {
-            background-color: #2c2c2c; /* یک رنگ خاکستری تیره */
+            background-color: #2c2c2c;
             font-family: 'Vazir', sans-serif;
-            color: #f0f0f0; /* برای خوانایی متن روی پس‌زمینه تیره */
+            color: #f0f0f0;
         }
 
         .content {
-            max-width: 1000px;
-            margin: 20px auto; /* وسط‌چین کردن محتوا */
+            max-width: 1500px;
+            margin: 20px auto;
         }
 
         table {
             margin-bottom: 20px;
-            background-color: #fff; /* رنگ پس‌زمینه جداول */
-            border-radius: 10px; /* گوشه‌های گرد */
-            overflow: hidden; /* جلوگیری از نمایش بیرون زدگی */
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         h5 {
-            color: #0056b3; /* رنگ عنوان‌ها */
+            color: #0056b3;
         }
 
         .btn-primary {
@@ -69,7 +68,23 @@
         }
 
         .table th, .table td {
-            vertical-align: middle; /* تنظیم عمودی متن داخل سلول‌ها */
+            vertical-align: middle;
+        }
+
+        .table th {
+            /*color: #f0f0f0;*/
+        }
+
+        .monthly-profit-table {
+            width: 80%; /* عرض جدول سود ماهانه */
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .values-table {
+            width: 80%;
+            max-width: 400px;
         }
     </style>
 
@@ -77,17 +92,17 @@
 <body>
 <nav>
     <ul>
+        <li>
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+            </a>
+        </li>
         <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
         <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
         <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
         <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
         <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
         <li><a href="{{ route('logout') }}">خروج</a></li>
-        <li>
-            <a href="{{ route('dashboard') }}">
-                <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
-            </a>
-        </li>
     </ul>
 </nav>
 
@@ -103,8 +118,8 @@
 
 <div class="content">
     <!-- جدول سود ماهیانه -->
-    <h5>جدول سود ماهیانه</h5>
-    <table class="table table-bordered table-striped table-hover">
+    <h5 style="color:#f0f0f0;position: relative;top: -20px;left: -400px" >جدول سود ماهیانه</h5>
+    <table class="table table-bordered table-striped table-hover monthly-profit-table" style="position: relative;right: -230px;top: -19px">
         <thead class="table-primary">
         <tr>
             <th>ردیف</th>
@@ -116,7 +131,7 @@
             <th>سود متعلقات</th>
             <th>سود شراکت</th>
             <th>کل سود</th>
-            <th>تاریخ</th>
+{{--            <th>تاریخ</th>--}}
         </tr>
         </thead>
         <tbody>
@@ -124,28 +139,28 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $profit['name'] }}</td>
-                <td>{{ $profit['current_wealth'] }}</td>
-                <td>{{ $profit['current_belongings'] }}</td>
-                <td>{{ $profit['current_participation_percentage'] }}</td>
-                <td>{{ $profit['wealth_profit'] }}</td>
-                <td>{{ $profit['belongings_profit'] }}</td>
-                <td>{{ $profit['participation_profit'] }}</td>
-                <td>{{ $profit['total_profit'] }}</td>
-                <td>{{ $profit['jdatetime'] }}</td>
+                <td>{{ number_format($profit['current_wealth']) }} تومان</td>
+                <td>{{ number_format($profit['current_belongings']) }} تومان</td>
+                <td>{{ $profit['current_participation_percentage'] }}%</td>
+                <td>{{ number_format($profit['wealth_profit']) }} تومان</td>
+                <td>{{ number_format($profit['belongings_profit']) }} تومان</td>
+                <td>{{ number_format($profit['participation_profit']) }} تومان</td>
+                <td>{{ number_format($profit['total_profit']) }} تومان</td>
+{{--                <td>{{ $profit['jdatetime'] }}</td>--}}
             </tr>
         @endforeach
         </tbody>
     </table>
 
     <!-- جدول حساب‌ها -->
-    <h5>جدول حساب‌ها</h5>
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="table-success">
+    <h5 style="color:#f0f0f0;position: relative;right: 1200px;top: -150px">جدول حساب‌ها</h5>
+    <table class="table table-bordered table-striped table-hover values-table" style="position: relative;right: 1100px;top: -150px">
+        <thead class="table-primary">
         <tr>
             <th>ردیف</th>
             <th>نام حساب</th>
             <th>مقدار</th>
-            <th>تاریخ</th>
+{{--            <th>تاریخ</th>--}}
         </tr>
         </thead>
         <tbody>
@@ -153,8 +168,8 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $account['account_name'] }}</td>
-                <td>{{ $account['value'] }}</td>
-                <td>{{ $account['jdatetime'] }}</td>
+                <td>{{ number_format($account['value']) }} تومان</td>
+{{--                <td>{{ $account['jdatetime'] }}</td>--}}
             </tr>
         @endforeach
         </tbody>

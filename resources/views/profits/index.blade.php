@@ -12,9 +12,8 @@
         nav {
             background-color: #3a3a3a;
             color: #e0e0e0;
-            padding: 5px; /* کاهش ارتفاع نوار */
+            padding: 5px;
             border-radius: 5px;
-            /*margin-bottom: 20px;*/
         }
 
         nav ul {
@@ -31,31 +30,30 @@
         }
 
         nav a:hover {
-            background-color: #f0f0f0; /* سفید کم‌رنگ */
+            background-color: #f0f0f0;
             color: #2c2c2c;
-            /*text-decoration: underline; !* زیر خط لینک‌ها هنگام هاور *!*/
         }
 
         body {
-            background-color: #2c2c2c; /* یک رنگ خاکستری تیره */
+            background-color: #2c2c2c;
             font-family: 'Vazir', sans-serif;
-            color: #f0f0f0; /* برای خوانایی متن روی پس‌زمینه تیره */
+            color: #f0f0f0;
         }
 
         .content {
-            max-width: 1000px;
-            margin: 20px auto; /* وسط‌چین کردن محتوا */
+            max-width: 1500px;
+            margin: 20px auto;
         }
 
         table {
             margin-bottom: 20px;
-            background-color: #fff; /* رنگ پس‌زمینه جداول */
-            border-radius: 10px; /* گوشه‌های گرد */
-            overflow: hidden; /* جلوگیری از نمایش بیرون زدگی */
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         h5 {
-            color: #e0e0e0; /* رنگ عنوان‌ها */
+            color: #f0f0f0;
         }
 
         .btn-primary {
@@ -69,22 +67,64 @@
         }
 
         .table th, .table td {
-            vertical-align: middle; /* تنظیم عمودی متن داخل سلول‌ها */
+            vertical-align: middle;
         }
 
-        /* استایل دراپ‌داون در گوشه سمت راست */
+        .left-table {
+            margin-left: auto;
+        }
+
+        .monthly-profit-table {
+            width: 100%; /* عرض جدول سود ماهانه را به 80% تنظیم می‌کند */
+            max-width: 1100px; /* حداکثر عرض 1000 پیکسل */
+        }
+
+        .values-table {
+            width: 80%; /* عرض جدول سود ماهانه را به 80% تنظیم می‌کند */
+            max-width: 400px;
+        }
+
         .dropdown-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 20px;
+            position: relative;
+            top: 60px;
+            right: 10px;
         }
 
         .dropdown-select {
-            background-color: #fff;
-            color: #333;
+            width: 100%;
             padding: 10px;
-            border-radius: 5px;
+            font-size: 16px;
             border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            appearance: none;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* هنگام هاور کردن (حرکت ماوس) */
+        .dropdown-select:hover {
+            border-color: #888;
+            background-color: #f1f1f1;
+        }
+
+        /* هنگام فوکوس (انتخاب شدن) */
+        .dropdown-select:focus {
+            border-color: #555;
+            box-shadow: 0 0 5px rgba(85, 85, 85, 0.2);
+        }
+
+        /* استایل دادن به گزینه‌های select */
+        .dropdown-select option {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        /* استایل کلی برای فرم */
+        form {
+            display: inline-block; /* برای جلوگیری از تغییر مکان */
         }
     </style>
 
@@ -93,19 +133,32 @@
 
 <nav>
     <ul>
+        <li>
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+            </a>
+        </li>
         <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
         <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
         <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
         <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
         <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
         <li><a href="{{ route('logout') }}">خروج</a></li>
-        <li>
-            <a href="{{ route('dashboard') }}">
-                <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
-            </a>
-        </li>
     </ul>
 </nav>
+
+<div>
+
+    <div class="dropdown-container" >
+        <form action="{{ route('profits.index') }}" method="GET">
+            <select name="date" class="dropdown-select" onchange="this.form.submit()">
+                @foreach($allDateTimes as $key => $date)
+                    <option value="{{ $key }}" {{ request('date') == $key ? 'selected' : '' }}>{{ $date }}</option>
+                @endforeach
+            </select>
+        </form>
+    </div>
+
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -117,78 +170,84 @@
     </div>
 @endif
 
-<div class="content">
 
-    <!-- اضافه کردن دراپ‌داون برای انتخاب تاریخ‌ها -->
-    <div class="dropdown-container">
-        <form action="{{ route('profits.index') }}" method="GET">
-            <select name="date" class="dropdown-select" onchange="this.form.submit()">
-                @foreach($allDateTimes as $key => $date)
-                    <option value="{{ $key }}" {{ request('date') == $key ? 'selected' : '' }}>{{ $date }}</option>
+
+    <!-- استفاده از سیستم گرید بوت‌استرپ برای نمایش جداول کنار هم -->
+    <div class="row">
+        <!-- جدول حساب‌ها (چپ) -->
+        <div class="col-md-5 left-table" style="position: relative;bottom: 20px;right: 1200px">
+            <h5 style="position: relative;right: 130px">جدول حساب‌ها</h5>
+            <table class="table table-bordered table-striped table-hover values-table">
+                <thead class="table-primary">
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام حساب</th>
+                    <th>مقدار</th>
+                    {{--                    <th>تاریخ</th>--}}
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($accountValues as $account)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $account['account_name'] }}</td>
+                        <td>{{ $account['value'] }} تومان</td>
+                        {{--                        <td>{{ $account['jdatetime'] }}</td>--}}
+                    </tr>
                 @endforeach
-            </select>
-        </form>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- جدول سود ماهیانه (راست) -->
+        <div class="col-md-7" style=";position: relative;bottom: 20px;right: -420px">
+            <h5 style="text-align: center">جدول سود ماهیانه</h5>
+            <table class="table table-bordered table-striped table-hover monthly-profit-table">
+                <thead class="table-primary">
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام</th>
+                    <th>دارایی فعلی</th>
+                    <th>متعلقات فعلی</th>
+                    <th>درصد شرکا فعلی</th>
+                    <th>سود سهام</th>
+                    <th>سود متعلقات</th>
+                    <th>سود شراکت</th>
+                    <th>کل سود</th>
+                    {{--                    <th>تاریخ</th>--}}
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($monthlyProfits as $profit)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $profit['person_name'] }}</td>
+                        <td>{{ number_format($profit['current_wealth']) }} تومان</td>
+                        <td>{{ number_format($profit['current_belongings']) }} تومان</td>
+                        <td>{{ $profit['current_participation_percentage'] }}%</td>
+                        <td>{{ number_format($profit['wealth_profit']) }} تومان</td>
+                        <td>{{ number_format($profit['belongings_profit']) }} تومان</td>
+                        <td>{{ number_format($profit['participation_profit']) }} تومان</td>
+                        <td>{{ number_format($profit['total_profit']) }} تومان</td>
+                        {{--                        <td>{{ $profit['jdatetime'] }}</td>--}}
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <!-- جدول سود ماهیانه -->
-    <h5>جدول سود ماهیانه</h5>
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="table-primary">
-        <tr>
-            <th>ردیف</th>
-            <th>نام</th>
-            <th>دارایی فعلی</th>
-            <th>متعلقات فعلی</th>
-            <th>درصد شرکا فعلی</th>
-            <th>سود سهام</th>
-            <th>سود متعلقات</th>
-            <th>سود شراکت</th>
-            <th>کل سود</th>
-            <th>تاریخ</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($monthlyProfits as $profit)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $profit['person_name'] }}</td>
-                <td>{{ $profit['current_wealth'] }}</td>
-                <td>{{ $profit['current_belongings'] }}</td>
-                <td>{{ $profit['current_participation_percentage'] }}</td>
-                <td>{{ $profit['wealth_profit'] }}</td>
-                <td>{{ $profit['belongings_profit'] }}</td>
-                <td>{{ $profit['participation_profit'] }}</td>
-                <td>{{ $profit['total_profit'] }}</td>
-                <td>{{ $profit['jdatetime'] }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-    <!-- جدول حساب‌ها -->
-    <h5>جدول حساب‌ها</h5>
-    <table class="table table-bordered table-striped table-hover">
-        <thead class="table-success">
-        <tr>
-            <th>ردیف</th>
-            <th>نام حساب</th>
-            <th>مقدار</th>
-            <th>تاریخ</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($accountValues as $account)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $account['account_name'] }}</td>
-                <td>{{ $account['value'] }}</td>
-                <td>{{ $account['jdatetime'] }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
 </div>
 
+<script>
+    function redirectToRoute(selectElement) {
+        const selectedValue = selectElement.value;
+
+        if (selectedValue) {
+            // ساخت آدرس URL و ارسال پارامتر
+            const url = `{{ route('profits.store') }}?datetime=${selectedValue}`;
+            window.location.href = url; // هدایت به URL
+        }
+    }
+</script>
 </body>
 </html>

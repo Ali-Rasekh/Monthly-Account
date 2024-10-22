@@ -128,6 +128,7 @@
         }
 
         nav {
+            width: 100%;
             position: relative;
             top: -30px;
             background-color: #3a3a3a;
@@ -162,17 +163,17 @@
 
 <nav>
     <ul>
+        <li>
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+            </a>
+        </li>
         <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
         <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
         <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
         <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
         <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
         <li><a href="{{ route('logout') }}">خروج</a></li>
-        <li>
-            <a href="{{ route('dashboard') }}">
-                <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
-            </a>
-        </li>
     </ul>
 </nav>
 
@@ -269,24 +270,8 @@
         const dateInput = document.getElementById('dateInput').value;
         const errorMessage = document.getElementById('error-message');
 
-        // بررسی صحت فرمت تاریخ
-        if (!validateDateFormat(dateInput)) {
-            errorMessage.style.display = 'block';  // نمایش پیغام خطا
-            return false;  // جلوگیری از ارسال فرم
-        } else {
-            errorMessage.style.display = 'none';  // پنهان کردن پیغام خطا
-            // document.getElementById('calculateForm').submit();  // ارسال فرم
-        }
-        // console.log(accountValues);  // برای بررسی مقادیر در کنسول
-
         // ارسال فرم به سرور
         form.submit();
-    }
-
-    function validateDateFormat(date) {
-        // ولیدیشن با استفاده از الگوی تاریخ شمسی (YYYY/MM/DD)
-        const regex = /^\d{4}\/\d{2}\/\d{2}$/;
-        return regex.test(date);
     }
 
     document.addEventListener('keypress', function (event) {

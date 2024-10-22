@@ -6,17 +6,18 @@
 
     <nav>
         <ul>
+            <li>
+                <a href="{{ route('dashboard') }}">
+                    <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+                </a>
+            </li>
             <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
             <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
             <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
             <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
             <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
             <li><a href="{{ route('logout') }}">خروج</a></li>
-            <li>
-                <a href="{{ route('dashboard') }}">
-                    <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
-                </a>
-            </li>
+
         </ul>
     </nav>
 

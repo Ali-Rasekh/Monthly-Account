@@ -1,21 +1,46 @@
 <html lang="fa">
 
 <head>
-    <title>حساب ها</title>
     <meta charset="UTF-8">
-    <link rel="icon" href="http://127.0.0.1:8000/aida.ico" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیریت حساب ها</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://cdn.fontcdn.ir/Font/Vazir/vazir.css" rel="stylesheet">
     <style>
+        nav {
+            background-color: #3a3a3a;
+            width: 1100px;
+            height: 70px;
+            color: #e0e0e0;
+            /*padding: 5px; !* کاهش ارتفاع نوار *!*/
+            border-radius: 5px;
+            /*margin-bottom: 20px;*/
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            color: #f0f0f0
+        }
+
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #f0f0f0; /* سفید کم‌رنگ */
+            color: #2c2c2c;
+            /*text-decoration: underline; !* زیر خط لینک‌ها هنگام هاور *!*/
+        }
 
         body {
-            background: linear-gradient(135deg, #6e7dff, #b03c9a);
-            font-family: 'Vazir', sans-serif;
             direction: rtl;
-            /*font-family: Arial, sans-serif;*/
+            background-color: #2c2c2c; /* یک رنگ خاکستری تیره */
+            font-family: 'Vazir', sans-serif;
+            color: #f0f0f0;
             margin: 20px;
-            /*background-color: #f8f9fa;*/
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -92,6 +117,37 @@
             background-color: #1976d2; /* رنگ تیره‌تر در هاور */
         }
 
+        .edit-button {
+            background-color: #ffc107; /* رنگ پس‌زمینه زرد-نارنجی */
+            color: #f0f0f0; /* رنگ متن تیره */
+            border: none; /* حذف حاشیه */
+            border-radius: 5px; /* گوشه‌های گرد */
+            padding: 5px 10px; /* فضای داخلی */
+            font-size: 0.9em; /* اندازه فونت */
+            cursor: pointer; /* نمایش دست برای دکمه */
+            transition: background 0.3s ease; /* انیمیشن تغییر رنگ */
+        }
+
+        .edit-button:hover {
+            background-color: #e0a800; /* رنگ تیره‌تر در حالت هاور */
+        }
+
+        .delete-button {
+            background-color: #f44336;
+        }
+
+        .delete-button:hover {
+            background-color: #c62828;
+        }
+
+        .detail-button {
+            background-color: #2196f3;
+        }
+
+        .detail-button:hover {
+            background-color: #1976d2;
+        }
+
         button {
             background-color: #007bff; /* رنگ آبی */
             color: white; /* رنگ متن سفید */
@@ -106,6 +162,22 @@
         button:hover {
             background-color: #0056b3; /* رنگ تیره‌تر در هاور */
             transform: scale(1.05); /* بزرگ‌تر شدن در هاور */
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            transition: color 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black; /* تغییر رنگ در هاور */
         }
 
         h2 {
@@ -128,12 +200,49 @@
             box-shadow: 0 0 5px rgba(0, 91, 255, 0.5); /* سایه در فوکوس */
         }
 
+        /* modal */
+        .side-modal {
+            transition: all 0.4s ease-out;
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background-color: #3a3a3a;
+            color: #f0f0f0;
+            overflow-x: hidden;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .side-modal-content {
+            padding: 20px;
+            width: 300px;
+        }
+
+        .close {
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
 
         .side-modal input {
             margin-bottom: 15px;
         }
+
+        .form-group {
+            text-align: right;
+        }
+
         label {
             float: right;
+        }
+
+        .btn {
+            width: 100%;
         }
 
         .alert {
@@ -159,6 +268,22 @@
 </head>
 <body>
 
+<nav>
+    <ul>
+        <li>
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+            </a>
+        </li>
+        <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
+        <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
+        <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
+        <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
+        <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
+        <li><a href="{{ route('logout') }}">خروج</a></li>
+
+    </ul>
+</nav>
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -175,7 +300,7 @@
     </div>
 @endif
 
-<button class="button add-account" onclick="openAccountModal('addMainAccountModal')">افزودن حساب معین</button>
+<button class="button add-account" style="position: relative;left: 175px;top: 40px;color: #f0f0f0" onclick="openAccountModal('addMainAccountModal')">افزودن حساب معین</button>
 
 
 <ul class="tree">
@@ -213,7 +338,7 @@
 
     function closeAllModals() {
         let openModals = document.querySelectorAll('.side-modal'); // پیدا کردن همه مدال‌ها
-        openModals.forEach(function (modal) {
+        openModals.forEach(function(modal) {
             modal.style.width = '0'; // بستن هر مدال
         });
     }

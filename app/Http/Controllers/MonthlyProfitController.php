@@ -20,7 +20,7 @@ class MonthlyProfitController extends Controller
 
         $allDateTimes = AccountValue::query()->pluck('jdatetime','id')->unique()->toArray();
         arsort($allDateTimes);
-
+//dd($allDateTimes);
         return view('profits.index', compact('monthlyProfits', 'accountValues', 'allDateTimes'));
     }
 

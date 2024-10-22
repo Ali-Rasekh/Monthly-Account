@@ -6,24 +6,27 @@
 
     <nav>
         <ul>
+            <li>
+                <a href="{{ route('dashboard') }}">
+                    <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+                </a>
+            </li>
             <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
             <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
             <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
             <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
             <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
             <li><a href="{{ route('logout') }}">خروج</a></li>
-            <li>
-                <a href="{{ route('dashboard') }}">
-                    <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
-                </a>
-            </li>
+
         </ul>
     </nav>
 
     <h2 class="text-center" style="color: #f0f0f0">لیست سرمایه داران</h2>
 
     <div class="text-center mb-3">
-        <button type="button" class="btn btn-primary " style="color: #f0f0f0" onclick="openSideModal()">افزودن فرد جدید</button>
+        <button type="button" class="btn btn-primary " style="color: #f0f0f0" onclick="openSideModal()">افزودن فرد
+            جدید
+        </button>
     </div>
 
     <div class="text-end mb-3" style="margin-left: 840px;">
@@ -51,14 +54,14 @@
     <table class="table table-sm table-bordered mt-3"
            style="width: 80%; margin: auto; background-color: #f7f7f7; direction: rtl;">
         <thead style="background-color: #007bff; color: white;">
-        <tr style="text-align:center;color: #f0f0f0" >
+        <tr style="text-align:center;color: #f0f0f0">
             <th>ردیف</th>
             <th>نام</th>
             <th>موبایل</th>
-            <th style="width: 20%;">سرمایه</th>
-            <th style="width: 20%;">متعلقات</th>
-            <th>درصد مشارکت</th>
+            <th style="width: 25%;">سرمایه</th>
+            <th style="width: 25%;">متعلقات</th>
             <th>عضو شرکا</th>
+            <th>درصد مشارکت</th>
             <th>ویرایش</th>
         </tr>
         </thead>
@@ -77,7 +80,7 @@
                                 onclick="openSideModalAction({{ $person->id }}, 1,'-')">-
                         </button>
                     </div>
-                    {{ number_format($person->wealth) }}
+                    {{ number_format($person->wealth) }} تومان
                 </td>
                 <td class="field-with-buttons">
                     <div class="d-inline-block buttons-inline">
@@ -88,10 +91,10 @@
                                 onclick="openSideModalAction({{ $person->id }}, 2,'-')">-
                         </button>
                     </div>
-                    {{ $person->belongings }}
+                    {{ number_format($person->belongings) }} تومان
                 </td>
-                <td>{{ $person->percentage_of_participation }}%</td>
                 <td>{{ $person->is_partner ? 'هست' : 'نیست' }}</td>
+                <td>{{ $person->percentage_of_participation }}%</td>
                 <td>
                     <button type="button" class="btn btn-warning btn-sm"
                             onclick="openEditModal({{ $person->id }}, '{{ $person->name }}', '{{ $person->mobile }}', {{ $person->is_partner }})">
@@ -260,6 +263,7 @@
             font-family: 'Vazir', sans-serif;
             color: #f0f0f0; /* برای خوانایی متن روی پس‌زمینه تیره */
         }
+
         /* استایل برای مدال کشویی */
         .side-modal {
             position: fixed;

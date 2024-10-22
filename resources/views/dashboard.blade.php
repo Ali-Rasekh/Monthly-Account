@@ -100,11 +100,11 @@
         <tr>
             <th>ردیف</th>
             <th>نام</th>
-            {{--            <th>متعلقات</th>--}}
             <th>درصد از متعلقات</th>
             <th>درصد مشارکت</th>
-            <th>سرمایه</th>
             <th>درصد از سرمایه</th>
+            <th>سرمایه</th>
+            {{--            <th>متعلقات</th>--}}
         </tr>
         </thead>
         <tbody>
@@ -112,11 +112,11 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $person['name'] }}</td>
+                <td>{{ $person['percent_of_belongings'] }}%</td>
+                <td>{{ $person['percentage_of_participation'] }}%</td>
+                <td>{{ $person['percent_of_wealth'] }}%</td>
+                <td>{{ number_format($person['wealth']) }} تومان</td>
                 {{--                <td>{{ $person['belongings'] }}</td>--}}
-                <td>{{ $person['percent_of_belongings'] }}</td>
-                <td>{{ $person['percentage_of_participation'] }}</td>
-                <td>{{ $person['wealth'] }}</td>
-                <td>{{ $person['percent_of_wealth'] }}</td>
             </tr>
         @endforeach
         </tbody>
@@ -132,13 +132,13 @@
         درصد شرکا: {{ $info['partners_percentage'] }}%
     </div>
     <div class="percentage-item">
-        مجموع سرمایه: {{ $info['total_wealth'] }}
+        مجموع سرمایه: {{ number_format($info['total_wealth']) }}
     </div>
     <div class="percentage-item">
-        مجموع متعلقات: {{ $info['total_belongings'] }}
+        مجموع متعلقات: {{ number_format($info['total_belongings']) }}
     </div>
     <div class="percentage-item">
-        کل سرمایه: {{ $info['total_capital'] }}
+        کل سرمایه: {{ number_format($info['total_capital']) }}
     </div>
 </div>
 

@@ -40,17 +40,18 @@
 
     <nav>
         <ul>
+            <li>
+                <a href="{{ route('dashboard') }}">
+                    <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
+                </a>
+            </li>
             <li><a href="{{ route('people.index') }}">مدیریت سرمایه داران</a></li>
             <li><a href="{{ route('accounts.index') }}">مدیریت حساب‌ها</a></li>
             <li><a href="{{ route('transactions.index') }}">گزارش تراکنش ها</a></li>
             <li><a href="{{ route('profits.index') }}">گزارش سودها</a></li>
             <li><a href="{{ route('settings.index') }}">تنظیمات</a></li>
             <li><a href="{{ route('logout') }}">خروج</a></li>
-            <li>
-                <a href="{{ route('dashboard') }}">
-                    <img src="{{ asset('aida.ico') }}" alt="لوگو" style="width: 50px; height: 40px;">
-                </a>
-            </li>
+
         </ul>
     </nav>
     <h2 class="text-center" style="color: #f0f0f0">لیست تراکنش‌ها</h2>
@@ -79,7 +80,7 @@
         <tbody>
         @foreach($transactions as $transaction)
             <tr class="text-center"
-                style="background-color: {{ $transaction->transaction_amount < 0 ? '#f8d7da' : '#d4edda' }};">
+                style="background-color: {{ $transaction->transaction_amount < 0 ? '#f5b5b8' : '#a9dfb6' }};">
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $transaction->person_name }}</td>
                 <td>{{ $transaction->transaction_type }}</td>
