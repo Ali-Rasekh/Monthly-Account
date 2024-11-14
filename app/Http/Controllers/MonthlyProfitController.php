@@ -15,6 +15,10 @@ class MonthlyProfitController extends Controller
     public function index()
     {
         $date = $this->calculateDate();
+
+        if (empty($date))  return redirect()->route('dashboard')
+            ->with('error', 'گزارشی موجود نیست.');
+
         $accountValues = AccountValue::query()->where('jdatetime', $date)->get();
         $monthlyProfits = MonthlyProfit::query()->where('jdatetime', $date)->get()->toArray();
 
@@ -25,7 +29,7 @@ class MonthlyProfitController extends Controller
     }
 
 
-    public function calculateDate(): int
+    public function calculateDate(): int|null
     {
         $maxDateTime = AccountValue::query()->max('jdatetime');
         $dateId = request()->query('date');

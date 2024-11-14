@@ -161,6 +161,8 @@
 
 <body>
 
+
+
 <nav>
     <ul>
         <li>
@@ -176,6 +178,13 @@
         <li><a href="{{ route('logout') }}">خروج</a></li>
     </ul>
 </nav>
+
+@if (session('error'))
+    <div class="alert alert-danger text-center mx-auto"
+         style=" margin-right: 800px;margin-top:-30px  ;color: red">
+        {{ session('error') }}
+    </div>
+@endif
 
 
 <div class="container">

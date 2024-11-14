@@ -175,6 +175,9 @@ class DashboardController extends Controller
     public function prepareMonthlyProfitsTable(mixed $peopleWithNames, float|int $totalWealthProfits, float|int $totalBelongingProfits, float|int $partnersProfits, CalculateInputDTO $inputDTO): mixed
     {
         foreach ($peopleWithNames as &$person) {
+            if (empty($person['wealth_profit'])) $person['wealth_profit']=0;
+            if (empty($person['belongings_profit'])) $person['belongings_profit']=0;
+            if (empty($person['participation_profit'])) $person['participation_profit']=0;
             $person['person_id'] = $person['id'];
             $person['current_wealth'] = $person['wealth'];
             $person['current_belongings'] = $person['belongings'];
@@ -188,7 +191,6 @@ class DashboardController extends Controller
 
             if ($person['percentage_of_participation'] > 0)
                 $person['participation_profit'] = ($person['percentage_of_participation'] * $partnersProfits) / 100;
-
             $person['total_profit'] = $person['wealth_profit'] + $person['belongings_profit'] + $person['participation_profit'];
             $person['jdatetime'] = $inputDTO->date;
 
